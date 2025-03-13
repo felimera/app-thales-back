@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1/data")
+@RequestMapping(path = "/api/v1/employee")
 public class EmployeeController {
     private IEmployeeService dataService;
 
@@ -23,11 +23,11 @@ public class EmployeeController {
 
     @GetMapping()
     public ResponseEntity<List<EmployeeDto>> getDataList() {
-        return ResponseEntity.ok(dataService.getDataList());
+        return ResponseEntity.ok(dataService.getEmployeeList());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<EmployeeDto> get(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<EmployeeDto> getById(@PathVariable(name = "id") Integer id) {
         return ResponseEntity.ok(dataService.getById(id));
     }
 }

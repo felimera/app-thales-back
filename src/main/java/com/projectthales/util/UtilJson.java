@@ -1,13 +1,13 @@
 package com.projectthales.util;
 
+import com.projectthales.exception.UnexpectedError;
+import com.projectthales.model.compent.ResponseCode;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.Objects;
 
 @Slf4j
 public class UtilJson {
@@ -17,14 +17,19 @@ public class UtilJson {
     }
 
     public static String getJsonResponse(String url) {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.get(url);
-        WebElement preElement = driver.findElement(By.tagName("pre"));
-        String jsonResponse = preElement.getText();
-        log.info(jsonResponse);
-        driver.quit();
+        try {
+            WebDriverManager.chromedriver().setup();
+            WebDriver driver = new ChromeDriver();
+            driver.get(url);
+            log.info("Driver =>> " + driver.toString());
+            WebElement preElement = driver.findElement(By.tagName("pre"));
+            String jsonResponse = preElement.getText();
+            log.info("Json =>> " + jsonResponse);
+            driver.quit();
 
-        return jsonResponse;
+            return jsonResponse;
+        } catch (Exception ex) {
+            throw new UnexpectedError(ResponseCode.UNEXPECTED_ERROR.getMensaje() + " =>> " + ex.getMessage(), ResponseCode.UNEXPECTED_ERROR.getCodigo());
+        }
     }
 }
