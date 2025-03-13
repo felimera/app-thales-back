@@ -1,7 +1,7 @@
 package com.projectthales.controller;
 
 import com.projectthales.model.dto.EmployeeDto;
-import com.projectthales.service.IDataService;
+import com.projectthales.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/data")
-public class DataController {
-    private IDataService dataService;
+public class EmployeeController {
+    private IEmployeeService dataService;
 
     @Autowired
-    public DataController(IDataService dataService) {
+    public EmployeeController(IEmployeeService dataService) {
         this.dataService = dataService;
     }
 

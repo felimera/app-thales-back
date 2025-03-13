@@ -5,7 +5,7 @@ import com.projectthales.mapper.EmployeeMapper;
 import com.projectthales.model.dto.EmployeeDto;
 import com.projectthales.model.entity.ResponseEmployeeEntity;
 import com.projectthales.model.entity.ResponseListEmployeesEntity;
-import com.projectthales.service.IDataService;
+import com.projectthales.service.IEmployeeService;
 import com.projectthales.util.UtilJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class DataServiceImpl implements IDataService {
+public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public List<EmployeeDto> getDataList() {
