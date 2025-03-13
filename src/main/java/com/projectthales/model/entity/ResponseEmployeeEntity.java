@@ -1,4 +1,4 @@
-package com.projectthales.model.dto;
+package com.projectthales.model.entity;
 
 import lombok.Data;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class ResponseDataDto {
+public class ResponseEmployeeEntity {
     private String status;
-    private DataDto data;
+    private EmployeeEntity data;
     private String message;
 }

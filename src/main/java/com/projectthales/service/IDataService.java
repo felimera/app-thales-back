@@ -1,11 +1,11 @@
 package com.projectthales.service;
 
-import com.projectthales.model.dto.DataDto;
+import com.projectthales.model.dto.EmployeeDto;
 
 import java.util.List;
 
 public interface IDataService {
-    List<DataDto> getDataList();
+    List<EmployeeDto> getDataList();
 
-    DataDto getById(Integer id);
+    EmployeeDto getById(Integer id);
 }

@@ -1,6 +1,6 @@
 package com.projectthales.controller;
 
-import com.projectthales.model.dto.DataDto;
+import com.projectthales.model.dto.EmployeeDto;
 import com.projectthales.service.IDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class DataController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<DataDto>> getDataList() {
+    public ResponseEntity<List<EmployeeDto>> getDataList() {
         return ResponseEntity.ok(dataService.getDataList());
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<DataDto> get(@PathVariable(name = "id") Integer id) {
+    public ResponseEntity<EmployeeDto> get(@PathVariable(name = "id") Integer id) {
         return ResponseEntity.ok(dataService.getById(id));
     }
 }

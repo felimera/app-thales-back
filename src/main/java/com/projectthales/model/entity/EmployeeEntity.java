@@ -1,4 +1,4 @@
-package com.projectthales.model.dto;
+package com.projectthales.model.entity;
 
 import lombok.Data;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class DataDto {
+public class EmployeeEntity {
     private Integer id;
     private String employee_name;
     private Double employee_salary;

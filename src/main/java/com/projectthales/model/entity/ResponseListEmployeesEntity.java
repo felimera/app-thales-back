@@ -1,4 +1,4 @@
-package com.projectthales.model.dto;
+package com.projectthales.model.entity;
 
 import lombok.Data;
 import lombok.Getter;
@@ -10,8 +10,8 @@ import java.util.List;
 @Data
 @Getter
 @Setter
-public class ResponseListDataDto {
+public class ResponseListEmployeesEntity {
     private String status;
-    private List<DataDto> data = new ArrayList<>();
+    private List<EmployeeEntity> data = new ArrayList<>();
     private String message;
 }
