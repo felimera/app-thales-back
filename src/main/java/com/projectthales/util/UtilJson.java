@@ -21,7 +21,7 @@ public class UtilJson {
             WebDriverManager.chromedriver().setup();
             WebDriver driver = new ChromeDriver();
             driver.get(url);
-            log.info("Driver =>> " + driver.toString());
+            log.info("Driver =>> " + driver);
             WebElement preElement = driver.findElement(By.tagName("pre"));
             String jsonResponse = preElement.getText();
             log.info("Json =>> " + jsonResponse);

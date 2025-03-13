@@ -13,4 +13,5 @@ public class EmployeeDto {
     private Double salary;
     private Integer age;
     private String image;
+    private Double employeeAnnualSalary;
 }

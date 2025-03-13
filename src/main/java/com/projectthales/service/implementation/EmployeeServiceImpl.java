@@ -6,9 +6,11 @@ import com.projectthales.exception.NotFoundException;
 import com.projectthales.mapper.EmployeeMapper;
 import com.projectthales.model.compent.ResponseCode;
 import com.projectthales.model.dto.EmployeeDto;
+import com.projectthales.model.entity.EmployeeEntity;
 import com.projectthales.model.entity.ResponseEmployeeEntity;
 import com.projectthales.model.entity.ResponseListEmployeesEntity;
 import com.projectthales.service.IEmployeeService;
+import com.projectthales.util.UtilBusiness;
 import com.projectthales.util.UtilJson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +35,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
         log.info(respuesta.toString());
         if (respuesta.getData() != null) {
-            return respuesta.getData().stream().map(EmployeeMapper.INSTANCE::toDto).toList();
+            return respuesta.getData()
+                    .stream()
+                    .map(EmployeeServiceImpl::getEmployeeDto)
+                    .toList();
         }
         return new ArrayList<>();
     }
@@ -46,12 +51,18 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
         log.info(respuesta.toString());
         if (ResponseCode.SUCCESSFUL_RESPONSE.getCodigo().equals(respuesta.getStatus())) {
-            if (Objects.nonNull(respuesta.getData()))
-                return EmployeeMapper.INSTANCE.toDto(respuesta.getData());
-            else
+            if (Objects.nonNull(respuesta.getData())) {
+                return getEmployeeDto(respuesta.getData());
+            } else
                 throw new NotFoundException(ResponseCode.EMPLOYEE_NOT_FOUND.getMensaje(), ResponseCode.EMPLOYEE_NOT_FOUND.getCodigo());
         } else {
             throw new ExternalServiceError(respuesta.getMessage(), ResponseCode.EXTERNAL_SERVICE_ERROR.getCodigo(), respuesta.getStatus());
         }
+    }
+
+    private static EmployeeDto getEmployeeDto(EmployeeEntity employeeEntity) {
+        EmployeeDto employeeDto = EmployeeMapper.INSTANCE.toDto(employeeEntity);
+        employeeDto.setEmployeeAnnualSalary(UtilBusiness.getAnnualSalaryEmployee(employeeEntity.getEmployee_salary()));
+        return employeeDto;
     }
 }
