@@ -1,22 +1,21 @@
-package com.projectthales.util;
+package com.projectthales.repository.implementation;
 
 import com.projectthales.exception.UnexpectedError;
 import com.projectthales.model.compent.ResponseCode;
+import com.projectthales.repository.IEmployeeRepository;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.stereotype.Repository;
 
 @Slf4j
-public class UtilJson {
-
-    private UtilJson() {
-        throw new IllegalStateException(UtilJson.class.toString());
-    }
-
-    public static String getJsonResponse(String url) {
+@Repository
+public class EmployeeRepositoryImpl implements IEmployeeRepository {
+    @Override
+    public String getEmployeeJsonResponse(String url) {
         try {
             WebDriverManager.chromedriver().setup();
             WebDriver driver = new ChromeDriver();

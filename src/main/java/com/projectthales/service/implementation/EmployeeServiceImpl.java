@@ -9,10 +9,11 @@ import com.projectthales.model.dto.EmployeeDto;
 import com.projectthales.model.entity.EmployeeEntity;
 import com.projectthales.model.entity.ResponseEmployeeEntity;
 import com.projectthales.model.entity.ResponseListEmployeesEntity;
+import com.projectthales.repository.IEmployeeRepository;
 import com.projectthales.service.IEmployeeService;
 import com.projectthales.util.UtilBusiness;
-import com.projectthales.util.UtilJson;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,19 @@ import java.util.Objects;
 @Slf4j
 public class EmployeeServiceImpl implements IEmployeeService {
 
+    private IEmployeeRepository employeeRepository;
+
+    @Autowired
+    public EmployeeServiceImpl(IEmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
     @Value("${service.url.externo}")
     private String url;
 
     @Override
     public List<EmployeeDto> getEmployeeList() {
-        String jsonResponse = UtilJson.getJsonResponse(url);
+        String jsonResponse = employeeRepository.getEmployeeJsonResponse(url);
         Gson gson = new Gson();
         ResponseListEmployeesEntity respuesta = gson.fromJson(jsonResponse, ResponseListEmployeesEntity.class);
 
@@ -45,7 +53,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public EmployeeDto getById(Integer id) {
-        String jsonResponse = UtilJson.getJsonResponse(url + id);
+        String jsonResponse = employeeRepository.getEmployeeJsonResponse(url + id);
         Gson gson = new Gson();
         ResponseEmployeeEntity respuesta = gson.fromJson(jsonResponse, ResponseEmployeeEntity.class);
 
