@@ -25,6 +25,7 @@ import java.util.Objects;
 @Slf4j
 public class EmployeeServiceImpl implements IEmployeeService {
 
+    private static final String URL_EXTERNAL="https://dummy.restapiexample.com/api/v1/employees";
     private IEmployeeRepository employeeRepository;
 
     @Autowired
@@ -37,7 +38,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public List<EmployeeDto> getEmployeeList() {
-        String jsonResponse = employeeRepository.getEmployeeJsonResponse(url);
+        String jsonResponse = employeeRepository.getEmployeeJsonResponse(URL_EXTERNAL);
+        log.info("Json =>> "+jsonResponse);
         Gson gson = new Gson();
         ResponseListEmployeesEntity respuesta = gson.fromJson(jsonResponse, ResponseListEmployeesEntity.class);
 
@@ -53,7 +55,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public EmployeeDto getById(Integer id) {
-        String jsonResponse = employeeRepository.getEmployeeJsonResponse(url + id);
+        String idEmployee=String.valueOf(id);
+        String jsonResponse = employeeRepository.getEmployeeJsonResponse(URL_EXTERNAL .concat("/").concat(idEmployee));
         Gson gson = new Gson();
         ResponseEmployeeEntity respuesta = gson.fromJson(jsonResponse, ResponseEmployeeEntity.class);
 
