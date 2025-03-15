@@ -1,12 +1,12 @@
 package com.projectthales.model.entity;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeEntity {
     private Integer id;
     private String employee_name;
